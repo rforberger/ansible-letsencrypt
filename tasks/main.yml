@@ -14,7 +14,7 @@
     owner: root
     group: root
   loop:
-    - { src: "production-300716-80cecefe51f0.json", dest: "/etc/letsencrypt/production-300716-80cecefe51f0.json"}
+    - { src: "/Users/ronnyforberger/google-secrets/production-300716-80cecefe51f0.json", dest: "/etc/letsencrypt/production-300716-80cecefe51f0.json"}
 
 - name: Install certbot
   ansible.builtin.apt:
