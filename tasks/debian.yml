@@ -1,0 +1,11 @@
+---
+- name: Install certbot
+  ansible.builtin.apt:
+    name: "{{ item }}"
+    state: present
+  loop:
+    - python3-certbot-dns-google
+    - certbot
+
+
+

@@ -1,0 +1,12 @@
+---
+
+- name: Install certbot
+  community.general.pkgng:
+    name: "{{ item }}"
+    state: present
+  loop:
+    - security/py-certbot-dns-google
+    - security/py-certbot
+
+
+
