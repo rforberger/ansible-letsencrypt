@@ -1,0 +1,18 @@
+- name: Create cronjob
+  ansible.builtin.cron:
+    name: "letsencrypt_{{ item.hostname }}"
+    backup: yes
+    day: "*"
+    hour: "2"
+    minute: "{{ item.minute }}"
+    month: "*"
+    weekday: "*"
+    user: "root"
+    job: "{{ item.command }}"
+  loop: "{{ letsencrypt.cron.jobs }}"
+
+- name: Issue cert for the first time
+  ansible.builtin.command:
+    cmd: "{{ item.command }}"
+    creates: "/etc/letsencrypt/live/{{ item.hostname }}/fullchain.pem"
+  loop: "{{ letsencrypt.cron.jobs }}"

@@ -1,0 +1,23 @@
+- set_fact:
+    group: "root"
+  when: ansible_os_family == "Debian"
+
+- set_fact:
+    group: "wheel"
+  when: ansible_os_family == "FreeBSD"
+
+- name: Create directory /etc/letsencrypt
+  ansible.builtin.file:
+    path: "/etc/letsencrypt"
+    state: directory
+    mode: 0700
+
+- name: Write SA key
+  ansible.builtin.copy:
+    dest: "{{ item.dest }}"
+    src: "{{ item.src }}"
+    mode: 0600
+    owner: root
+    group: "{{ group }}"
+  loop:
+    - { src: "/Users/ronnyforberger/google-secrets/production-300716-80cecefe51f0.json", dest: "/etc/letsencrypt/production-300716-80cecefe51f0.json"}
